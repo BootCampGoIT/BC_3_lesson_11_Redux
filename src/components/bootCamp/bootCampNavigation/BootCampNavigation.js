@@ -8,7 +8,7 @@ const BootCampNavigation = () => {
     <>
       <ul className='list'>
         {bootCampRoutes.map(({ path, name, exact }) => (
-          <li className='listItem'>
+          <li className='listItem' key={path}>
             <NavLink
               to={match.url + path}
               exact={exact}
@@ -23,6 +23,7 @@ const BootCampNavigation = () => {
         <Switch>
           {bootCampRoutes.map(({ path, exact, component }) => (
             <Route
+              key={path}
               path={match.url + path}
               exact={exact}
               component={component}

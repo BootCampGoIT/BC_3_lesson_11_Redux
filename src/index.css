@@ -4,7 +4,6 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 10px 40px;
 }
 
 code {
@@ -14,6 +13,7 @@ code {
 .list {
   list-style: none;
   display: flex;
+  margin-right: 20px;
 }
 
 .right {
@@ -21,7 +21,10 @@ code {
 }
 
 .listItem {
-  margin: 10px;
+  margin-right: 20px;
+}
+.listItem:last-child {
+  margin-right: 0;
 }
 
 .link {

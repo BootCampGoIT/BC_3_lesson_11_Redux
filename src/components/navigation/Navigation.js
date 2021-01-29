@@ -7,7 +7,7 @@ const Navigation = () => {
     <>
       <ul className='list right'>
         {mainRoutes.map(({ path, name, exact }) => (
-          <li className='listItem'>
+          <li className='listItem' key={path}>
             <NavLink
               to={path}
               exact={exact}
@@ -21,7 +21,7 @@ const Navigation = () => {
       <Suspense fallback={<h2>...loading</h2>}>
         <Switch>
           {mainRoutes.map(({ path, exact, component }) => (
-            <Route path={path} exact={exact} component={component} />
+            <Route path={path} exact={exact} component={component} key={path} />
           ))}
         </Switch>
       </Suspense>
