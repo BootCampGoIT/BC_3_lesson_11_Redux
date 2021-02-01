@@ -1,16 +1,27 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { deleteCamp, setFilter } from "../../../redux/actions/bootCampActions";
 
-const BootCampList = ({ bootCamps, filter, deleteCamp, setFilter }) => {
+const BootCampList = () => {
+  const dispatch = useDispatch();
+  
+  const filter = useSelector((state) => state.bootCamps.filter);
+
+  const bootCamps = useSelector((state) =>
+    state.bootCamps.bootCamps.filter((item) =>
+      item.campName.toLowerCase().includes(state.bootCamps.filter.toLowerCase())
+    )
+  );
+
   const onHandleDelete = (e) => {
     const { id } = e.target;
-    deleteCamp(id);
+    dispatch(deleteCamp(id));
   };
   const onHandleChange = (e) => {
     const { value } = e.target;
-    setFilter(value);
+    dispatch(setFilter(value));
   };
+
   return (
     <div>
       <input type='text' onChange={onHandleChange} value={filter} />
@@ -29,22 +40,25 @@ const BootCampList = ({ bootCamps, filter, deleteCamp, setFilter }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    bootCamps: state.bootCamps.filter(item=> item.campName.toLowerCase().includes(state.filter.toLowerCase())),
-    filter: state.filter,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     bootCamps: state.bootCamps.bootCamps.filter((item) =>
+//       item.campName.toLowerCase().includes(state.bootCamps.filter.toLowerCase())
+//     ),
+//     filter: state.bootCamps.filter,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteCamp: (id) => {
-      dispatch(deleteCamp(id));
-    },
-    setFilter: (id) => {
-      dispatch(setFilter(id));
-    },
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     deleteCamp: (id) => {
+//       dispatch(deleteCamp(id));
+//     },
+//     setFilter: (id) => {
+//       dispatch(setFilter(id));
+//     },
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BootCampList);
+// export default connect(null, mapDispatchToProps)(BootCampList);
+export default BootCampList;
